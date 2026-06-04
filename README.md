@@ -1,6 +1,6 @@
 <p align="center">
   <!-- Substitua pelo link da imagem de banner/logo quando desejar -->
-  <img src="static/squeak_banner.png" alt="Squeak the Cloud Banner" width="700">
+  <img src="https://github.com/user-attachments/assets/d18014bf-60e4-4202-9488-22af6430bd37" alt="Squeak the Cloud Banner" width="700">
 </p>
 
 <p align="center">
@@ -189,15 +189,3 @@ Ao final de cada execução, a ferramenta consolida um índice em `consolidated_
 
 Quer ajudar no desenvolvimento do projeto ou colaborar resolvendo as demandas pendentes? Veja como começar nas nossas diretrizes de [contribuição](CONTRIBUTING.md) e confira a lista de [Issues](https://github.com/s3r4ph-0r4cul0/SqueakTheCloud/issues) abertas!
 
----
-
-## 📄 Licença
-
-Este projeto está sob a licença [MIT](https://github.com/s3r4ph-0r4cul0/SqueakTheCloud/blob/main/LICENSE).
-
----
-
-<p align="center">
-  <i>"Yes, I am a criminal. My crime is that of curiosity. My crime is that of judging people by what they say and think, not what they look like. My crime is that of outsmarting you, something that you will never forgive me for."</i><br>
-  — <b>The Mentor</b>, <a href="https://phrack.org/issues/7/3">The Conscience of a Hacker</a> (Phrack Issue 7, Phile 3)
-</p>
