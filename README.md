@@ -1,6 +1,6 @@
 <p align="center">
   <!-- Substitua pelo link da imagem de banner/logo quando desejar -->
-  <img src="static/squeak_banner.png" alt="Squeak the Cloud Banner" width="700">
+  <img src="https://github.com/user-attachments/assets/6b4a66fc-3645-430b-8086-0e337eca7e6e" alt="Squeak the Cloud Banner" width="700">
 </p>
 
 <p align="center">
