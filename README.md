@@ -183,16 +183,4 @@ Ao final de cada execução, a ferramenta consolida um índice em `consolidated_
 }
 ```
 
----
-
-## 📄 Licença
-
-Este projeto está sob a licença [MIT](https://github.com/s3r4ph-0r4cul0/SqueakTheCloud/blob/main/LICENSE).
-
----
-
-<p align="center">
-  <i>"Yes, I am a criminal. My crime is that of curiosity. My crime is that of judging people by what they say and think, not what they look like. My crime is that of outsmarting you, something that you will never forgive me for."</i><br>
-  — <b>The Mentor</b>, <a href="https://phrack.org/issues/7/3">The Conscience of a Hacker</a> (Phrack Issue 7, Phile 3)
-</p>
 
