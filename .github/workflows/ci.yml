@@ -1,0 +1,52 @@
+name: Squeak the Cloud CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  analyze-and-build:
+    name: Build & Verify
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        go-version: ['1.25.0']
+      fail-fast: false
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Go ${{ matrix.go-version }}
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{ matrix.go-version }}
+        cache: true
+
+    - name: Install Dependencies
+      run: go mod download
+
+    - name: Verify Code Formatting
+      run: |
+        if [ "${{ matrix.os }}" != "windows-latest" ]; then
+          unformatted=$(gofmt -l .)
+          if [ ! -z "$unformatted" ]; then
+            echo "Os seguintes arquivos não estão formatados de acordo com gofmt:"
+            echo "$unformatted"
+            exit 1
+          fi
+        fi
+      shell: bash
+
+    - name: Run Static Analysis (Go Vet)
+      run: go vet ./...
+
+    - name: Build Binary
+      run: go build -v -o squeak-audit main.go
