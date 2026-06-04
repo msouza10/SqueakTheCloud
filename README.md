@@ -185,6 +185,12 @@ Ao final de cada execução, a ferramenta consolida um índice em `consolidated_
 
 ---
 
+## 🤝 Contribuição
+
+Quer ajudar no desenvolvimento do projeto ou colaborar resolvendo as demandas pendentes? Veja como começar nas nossas diretrizes de [contribuição](CONTRIBUTING.md) e confira a lista de [Issues](https://github.com/s3r4ph-0r4cul0/SqueakTheCloud/issues) abertas!
+
+---
+
 ## 📄 Licença
 
 Este projeto está sob a licença [MIT](https://github.com/s3r4ph-0r4cul0/SqueakTheCloud/blob/main/LICENSE).
