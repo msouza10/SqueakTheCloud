@@ -66,8 +66,3 @@ Ao enviar o seu Pull Request, certifique-se de que:
 *   O PR aponte para a branch `main` do repositório original.
 *   Você descreva na descrição do PR qual Issue está sendo resolvida (ex: *Resolves #3*).
 
----
-
-## ⚖️ Código de Conduta e Licença
-
-Ao contribuir para este repositório, você concorda que o seu código será disponibilizado sob a licença MIT do projeto.
