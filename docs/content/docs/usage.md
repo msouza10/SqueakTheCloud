@@ -12,7 +12,7 @@ Este guia demonstra como executar o **Squeak the Cloud** a partir do terminal, s
 
 O mecanismo interno do **Squeak the Cloud** carrega as credenciais e direciona a execução de acordo com o provedor passado como argumento CLI. Os resultados parciais são gerados de forma assíncrona/modular e, ao fim, consolidados em um relatório central:
 
-```mermaid
+{{< mermaid >}}
 graph TD
     A[Credenciais do Operador / Env Vars] --> B(Squeak the Cloud Engine)
     B --> C{Provedor Selecionado}
@@ -28,7 +28,7 @@ graph TD
     J --> M(results/consolidated_results.json)
     K --> M
     L --> M
-```
+{{< /mermaid >}}
 
 ---
 

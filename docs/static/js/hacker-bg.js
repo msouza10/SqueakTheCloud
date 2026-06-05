@@ -12,48 +12,91 @@ window.addEventListener('DOMContentLoaded', () => {
     height = canvas.height = window.innerHeight;
   });
 
-  // Hacker Yellow colors: varying shades of cyber gold/yellow
+  // Track mouse position
+  let mouseX = -1000;
+  let mouseY = -1000;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  window.addEventListener('mouseout', () => {
+    mouseX = -1000;
+    mouseY = -1000;
+  });
+
+  // Hacker Yellow colors
   const colors = [
-    'rgba(241, 196, 15, 0.95)',  // Base Cyber Yellow
-    'rgba(243, 156, 18, 0.95)',  // Deep Golden Orange
-    'rgba(255, 215, 0, 0.95)',    // Bright Gold
-    'rgba(245, 176, 65, 0.95)',  // Light Warm Yellow
-    'rgba(248, 196, 113, 0.95)'  // Pale Golden
+    'rgba(241, 196, 15, 0.95)',
+    'rgba(243, 156, 18, 0.95)',
+    'rgba(255, 215, 0, 0.95)',
+    'rgba(245, 176, 65, 0.95)',
+    'rgba(248, 196, 113, 0.95)'
   ];
   
-  // Matrix falling characters: binary & security-related keywords
   const characters = "0101010101010101010101010101SQUEAKCLOUDSHADOWADMINOPSECIAMRBACGCPJSONAUDIT";
-  
-  const fontSize = 14;
-  const columns = Math.floor(width / fontSize);
+  const fontSize = 16;
+  let columns = Math.floor(width / fontSize);
 
-  // Initialize drops at random starting heights to prevent them falling in a single line initially
-  const rainDrops = Array.from({ length: columns }, () => Math.floor(Math.random() * -100));
+  let rainDrops = Array.from({ length: columns }, () => Math.floor(Math.random() * -100));
+  let speeds = Array.from({ length: columns }, () => 0.5 + Math.random() * 1.5);
+
+  window.addEventListener('resize', () => {
+    const newColumns = Math.floor(width / fontSize);
+    if (newColumns > columns) {
+      for(let i=columns; i<newColumns; i++){
+        rainDrops[i] = Math.floor(Math.random() * -100);
+        speeds[i] = 0.5 + Math.random() * 1.5;
+      }
+    }
+    columns = newColumns;
+  });
 
   const draw = () => {
-    // Semi-transparent black matching neutral-900 background to create trail effect
-    ctx.fillStyle = 'rgba(5, 5, 5, 0.08)';
+    ctx.fillStyle = 'rgba(5, 5, 5, 0.15)'; // slightly faster fade for trailing effect
     ctx.fillRect(0, 0, width, height);
 
-    ctx.font = fontSize + 'px monospace';
+    ctx.font = 'bold ' + fontSize + 'px monospace';
+    ctx.textAlign = 'center';
 
-    for (let i = 0; i < rainDrops.length; i++) {
-      // Pick a random character
+    for (let i = 0; i < columns; i++) {
+      if (rainDrops[i] === undefined) continue;
+
       const text = characters.charAt(Math.floor(Math.random() * characters.length));
       
-      // Select a random hacker yellow shade
-      ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-      
-      // Draw character
-      ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+      const x = i * fontSize + fontSize/2;
+      const y = rainDrops[i] * fontSize;
 
-      // Reset drop to the top with random delay once it passes the screen height
-      if (rainDrops[i] * fontSize > height && Math.random() > 0.975) {
-        rainDrops[i] = 0;
+      // Mouse repulsion calculation
+      const dx = mouseX - x;
+      const dy = mouseY - y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      let offsetX = x;
+      let offsetY = y;
+      
+      if (distance < 120) {
+        // Repel the character away from mouse
+        const force = (120 - distance) / 120;
+        offsetX -= dx * force * 0.5;
+        offsetY -= dy * force * 0.5;
+        ctx.fillStyle = '#fff'; // Glow bright white when repelled
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = '#f1c40f';
+      } else {
+        ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+        ctx.shadowBlur = 0;
       }
-      rainDrops[i]++;
+      
+      ctx.fillText(text, offsetX, offsetY);
+
+      if (rainDrops[i] * fontSize > height && Math.random() > 0.95) {
+        rainDrops[i] = 0;
+        speeds[i] = 0.5 + Math.random() * 1.5;
+      }
+      rainDrops[i] += speeds[i];
     }
   };
 
-  setInterval(draw, 33);
+  // 60fps roughly
+  setInterval(draw, 30);
 });
