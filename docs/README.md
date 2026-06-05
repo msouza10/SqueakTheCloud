@@ -66,3 +66,45 @@ Qualquer alteração feita nos arquivos Markdown ou CSS será atualizada automat
   * `layouts/partials/header/basic.html`: Cabeçalho customizado.
   * `layouts/partials/footer.html`: Rodapé customizado.
 * `assets/css/schemes/hacker-yellow.css`: Arquivo CSS onde residem todas as variáveis de cores, efeitos de brilho, animações dos cartões e o visual Liquid Glass.
+
+---
+
+## 📝 Como Adicionar Nova Documentação
+
+Para expandir ou adicionar novas páginas ao site de documentação, siga as instruções e a lógica abaixo:
+
+### 1. Criar o Arquivo Markdown
+Todos os artigos principais de documentação devem ser criados na pasta `docs/content/docs/` com a extensão `.md`.
+* Exemplo: `docs/content/docs/meu-novo-guia.md`
+
+### 2. Definir o Front Matter (Metadados do Topo)
+Toda nova página precisa ter um bloco de metadados delimitado por `---` logo no início do arquivo. Use a seguinte estrutura padrão:
+```markdown
+---
+title: "Título que Aparecerá na Página"
+description: "Uma descrição curta para SEO e pré-visualização"
+lead: "Texto curto em destaque que inicia o artigo (opcional)"
+date: 2026-06-05
+draft: false
+weight: 40
+---
+```
+
+### 3. Lógica de Ordenação e Estrutura
+* **Ordem no Menu Lateral**: É controlada pela propriedade `weight` no Front Matter.
+  * `weight: 10` (Aparece no topo do menu lateral - ex: Introdução/Instalação)
+  * `weight: 20` (Aparece abaixo - ex: Como Usar)
+  * Quanto maior o número, mais para baixo a página ficará listada.
+* **Menus Aninhados**: Se quiser criar sub-páginas, crie uma subpasta dentro de `docs/content/docs/` (ex: `docs/content/docs/aws/`), adicione um arquivo `_index.md` nela com metadados do menu pai, e coloque as sub-páginas dentro.
+
+### 4. Boas Práticas do Tema
+* **Diagramas**: Sempre use o shortcode `{{< mermaid >}}` para diagramas de fluxo em vez de blocos genéricos de código ` ```mermaid `.
+  ```markdown
+  {{< mermaid >}}
+  graph TD
+      A --> B
+  {{< /mermaid >}}
+  ```
+* **Links Internos**: Para criar links seguros entre páginas da documentação sem quebrar as URLs, use o sistema de referência do Hugo:
+  `[Texto do Link]({{< ref "getting-started.md" >}})`
+
